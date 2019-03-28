@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int top = -1;
+char stack[100]
+
+// function prototypes
+void push(char);
+void pop();
+void find_top();
+
