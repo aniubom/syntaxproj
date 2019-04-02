@@ -1,12 +1,114 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+typedef int bool;
 
+
+#define true 1
+#define false 0
+int isvalid;
 int top = -1;
-char stack[100]
+char stack[100];
+
 
 // function prototypes
 void push(char);
 void pop();
 void find_top();
 
+/* Global Variable declarations */
+int charClass;
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+
+char lexeme [100];
+char nextChar;
+int lexLen;
+int token;
+int nextToken;
+FILE *in_fp,*in_fp2, *fopen();
+void addChar();
+void getChar();
+void getNonBlank();
+int lex();
+
+/* Character classes */
+#define LETTER 0
+#define DIGIT 1
+#define UNKNOWN 99
+
+/* Token codes */
+#define INT_LIT 10
+#define IDENT 11
+#define ASSIGN_OP 20
+#define ADD_OP 21
+#define SUB_OP 22
+#define MULT_OP 23
+#define DIV_OP 24
+#define LEFT_PAREN 25
+#define RIGHT_PAREN 26
+/******************************************************/
+/* main prog */
+main() {
+	 
+/* Open the input data file and process its contents */
+ if ((in_fp = fopen("front.txt", "r")) == NULL)
+ printf("ERROR - cannot open front.in \n"); 
+ else {
+ 	in_fp2 = fopen("front.txt", "r");
+ 	 char line2 [128][324];
+ 	 int i=0;
+ 	 int count=0;
+ 	 char line[128];
+ 	  while ( fgets ( line, sizeof line, in_fp2 ))
+ 	  {
+ 	  	count+=1;
+ 	  	strcpy(line2[i],line);
+ 	  	i+=1;
+	   }
+	   	in_fp2 = fopen("front.txt", "r");
+	 int u=0; 
+	 
+
+ line [ 128 ]; /* or other suitable maximum line size */
+ 
+ int k=0;
+     		 while ( k<count  ) /* read a line */
+      		{
+      			
+       //  fputs ( line2[k], stdout ); /* write the line */
+         //isvalid=isValid(line);
+            
+          	isvalid=isValid(line2[k]);
+          	
+          //	printf("%d",(int) isvalid);
+      
+      if(isvalid==0)//Means expression is not valid
+      {
+      	
+        fputs("Expression",stdout);
+		fputs ( line2[k], stdout );
+		  fputs(":Invalid .Skipping the line\n",stdout);
+      
+      	
+	  }
+	  
+	  else
+	  {
+	  	fputs("Expression",stdout);
+		fputs ( line2[k], stdout );
+		printf("\n");
+	  
+	  		getChar();
+	 do {
+	 	
+ 	lex();
+ 		} //dowhile
+	 while (nextToken != 26 );
+	  }
+      k+=1;
+    }//bigger while
+ 
+	}//else
+}
