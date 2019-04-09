@@ -272,3 +272,16 @@ int isValid(char *s)				//CHecks if the expression in string s is valid or not
 
 
 }
+
+
+// to push elements in stack
+void push(char a)		//pushes a character in stack
+{
+	stack[top] = a;
+	top++;
+}
+ 
+
+
+
+
