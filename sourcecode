@@ -294,6 +294,20 @@ void pop()		//pops a character from stack
 		top--;
 	}
 }
+
+// to find top element of stack
+bool find_top()// return true if brackets are correct.Note;Brackets are correct if top==-1 else brackets are not correct
+{
+
+	if (top == -1)
+		return true;
+	else
+	{
+	top=-1;
+	return false;
+	}	
+}
+
  
 
 
