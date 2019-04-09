@@ -281,7 +281,19 @@ void push(char a)		//pushes a character in stack
 	top++;
 }
  
-
-
+// to pop elements from stack
+void pop()		//pops a character from stack
+{
+	if (top == -1)
+	{
+	//	printf("expression is invalid\n");
+		exit(0);
+	}	
+	else
+	{		
+		top--;
+	}
+}
+ 
 
 
