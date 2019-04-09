@@ -6,6 +6,7 @@ typedef int bool;
 
 #define true 1
 #define false 0
+//setting boolean as int
 int isvalid;
 int top = -1;
 char stack[100];
@@ -14,8 +15,10 @@ char stack[100];
 // function prototypes
 void push(char);
 void pop();
-void find_top();
+bool find_top();
 
+#include <stdio.h>
+#include <ctype.h>
 /* Global Variable declarations */
 int charClass;
 #define _GNU_SOURCE
@@ -53,9 +56,9 @@ int lex();
 main() {
 	 
 /* Open the input data file and process its contents */
- if ((in_fp = fopen("front.txt", "r")) == NULL)
+ if ((in_fp = fopen("front.txt", "r")) == NULL)                    //if the file is not found print error
  printf("ERROR - cannot open front.in \n"); 
- else {
+ else {                                                           //if file found, read file
  	in_fp2 = fopen("front.txt", "r");
  	 char line2 [128][324];
  	 int i=0;
@@ -80,7 +83,7 @@ main() {
        //  fputs ( line2[k], stdout ); /* write the line */
          //isvalid=isValid(line);
             
-          	isvalid=isValid(line2[k]);
+          	isvalid=isValid(line2[k]);      //checks if the expression is correct
           	
           //	printf("%d",(int) isvalid);
       
@@ -100,15 +103,61 @@ main() {
 		fputs ( line2[k], stdout );
 		printf("\n");
 	  
-	  		getChar();
+	  		getChar();  //gets the next character of input and determines its character class
 	 do {
 	 	
  	lex();
  		} //dowhile
-	 while (nextToken != 26 );
+	 while (nextToken != 26 );   //while the next line is not reached...
 	  }
       k+=1;
     }//bigger while
  
 	}//else
+}
+/*****************************************************/
+/* lookup - a function to lookup operators and parentheses
+ and return the token */
+int lookup(char ch) {
+ switch (ch) {
+ case '(':
+ addChar();
+ nextToken = LEFT_PAREN;
+ break;
+ case ')':
+ addChar();
+ nextToken = RIGHT_PAREN;
+ break;
+ case '+':
+ addChar();
+ nextToken = ADD_OP;
+ break;
+ case '-':
+ addChar();
+ nextToken = SUB_OP;
+ break;
+ case '*':
+ addChar();
+ nextToken = MULT_OP;
+ break;
+ case '/':
+ addChar();
+ nextToken = DIV_OP;
+ break;
+ default:
+ addChar();
+ nextToken = EOF;
+ break;
+ }
+ return nextToken;
+}
+/*****************************************************/
+/* addChar - a function to add nextChar to lexeme */
+void addChar() {
+ if (lexLen <= 98) {
+ lexeme[lexLen++] = nextChar;
+ lexeme[lexLen] = 0;
+ }
+ else
+ printf("Error - lexeme is too long \n");
 }
